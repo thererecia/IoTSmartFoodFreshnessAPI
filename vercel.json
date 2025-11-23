@@ -1,6 +1,8 @@
 {
-  "name": "smart-food-freshness-api",
-  "version": "1.0.0",
-  "main": "index.js",
-  "type": "module"
+  "version": 2,
+  "functions": {
+    "api/predict.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
