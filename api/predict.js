@@ -1,14 +1,4 @@
 export default function handler(req, res) {
-  // CORS
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-  // Tangani preflight OPTIONS
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
   if (req.method === "POST") {
     let item = "";
 
@@ -18,7 +8,17 @@ export default function handler(req, res) {
       return res.status(400).json({ error: "Invalid JSON body" });
     }
 
-    const status = Math.random() > 0.5 ? "fresh" : "rotten";
+    // RANDOM yang lebih bervariasi
+    const r = Math.random();
+    let status = "fresh";
+
+    if (r < 0.3) {
+      status = "rotten"; // 30%
+    } else if (r < 0.6) {
+      status = "fresh";  // 30%
+    } else {
+      status = "ok";     // 40% opsional status baru
+    }
 
     return res.status(200).json({ item, status });
   }
